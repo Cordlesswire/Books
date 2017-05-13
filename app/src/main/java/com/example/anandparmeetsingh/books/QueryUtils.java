@@ -59,10 +59,10 @@ public class QueryUtils {
         }
 
         // Extract relevant fields from the JSON response and create a list of {@link EarthquakeAdapter}s
-        List<Word> earthquake = extractFeatureFromJson(jsonResponse);
+        List<Word> words = extractFeatureFromJson(jsonResponse);
 
         // Return the list of {@link EarthquakeAdapter}s
-        return earthquake;
+        return words;
     }
 
     /**
@@ -108,7 +108,7 @@ public class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the words JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -168,7 +168,7 @@ public class QueryUtils {
             // Extract the JSONArray associated with the key called "features",
             // which represents a list of features (or earthquakes).
             JSONArray earthquakeArray = baseJsonResponse.getJSONArray("items");
-            // For each earthquake in the earthquakeArray, create an {@link EarthquakeAdapter} object
+            // For each words in the earthquakeArray, create an {@link EarthquakeAdapter} object
             for (int i = 0; i < earthquakeArray.length(); i++) {
 
                 JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
@@ -193,20 +193,20 @@ public class QueryUtils {
                 //}
                 //}
 
-                // Get a single earthquake at position i within the list of earthquakes
+                // Get a single words at position i within the list of earthquakes
                 // Create a new {@link EarthquakeAdapter} object with the magnitude, location, time,
                 // and url from the JSON response.
-                Word earthquake = new Word(title, publishedDate, pageCount, thumbnail);
+                Word words = new Word(title, publishedDate, pageCount, thumbnail);
 
                 // Add the new {@link EarthquakeAdapter} to the list of earthquakes.
-                earthquakes.add(earthquake);
+                earthquakes.add(words);
             }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the words JSON results", e);
         }
         // Return the list of earthquakes
         return earthquakes;

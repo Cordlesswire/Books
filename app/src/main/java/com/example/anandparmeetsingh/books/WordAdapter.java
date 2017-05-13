@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,14 +14,23 @@ import java.util.ArrayList;
  * Created by ParmeetSingh on 5/9/2017.
  */
 
-public class WordAdapter extends BaseAdapter {
+public class WordAdapter extends ArrayAdapter<Word> {
     ArrayList<Word> Word = new ArrayList<>();
     Activity mContext;
 
-    public WordAdapter(Activity context, ArrayList<Word> Word) {
-        mContext = context;
-        this.Word = Word;
+    public WordAdapter(Activity context, ArrayList<Word> words) {
+        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
+        // the second argument is used when the ArrayAdapter is populating a single TextView.
+        // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
+        // going to use this second argument, so it can be any value. Here, we used 0.
+        super(context, 0, words);
     }
+
+    //public WordAdapter(Activity context, ArrayList<Word> Word) {
+      //  mContext = context;
+        //this.Word = Word;
+        //super(context, 0, Word);
+    //}
 
     @Override
     public int getCount() {
@@ -29,7 +38,7 @@ public class WordAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int pos) {
+    public com.example.anandparmeetsingh.books.Word getItem(int pos) {
         return Word.get(pos);
     }
 
